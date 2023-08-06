@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+   <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+      <meta name="apple-mobile-web-app-capable" content="yes"/>
+      <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+   </f:facet>
+
+</h:head>
+<h:body>
+   <h:form>
+      <div class="flex align-items-center justify-content-center mt-3">
+         <div class="surface-card p-7 shadow-2 border-round w-full lg:w-5">
+            <div class="text-center mb-5">
+               <p:graphicImage name="logo.png" library="images" alt="Image" height="50" styleClass="mb-3"/>
+               <div class="text-900 text-3xl font-medium mb-3">Kimwanyi Admin</div>
+            </div>
+
+            <div>
+               <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+               <p:inputText  id="email1"  styleClass="w-24rem mb-3" value="#{loginForm.member.email}"/>
+
+               <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+               <p:password id="password1"  styleClass="w-24rem mb-1" toggleMask="true" redisplay="true" value="#{loginForm.member.password}"/>
+
+               <div class="flex justify-content-center mt-4">
+                  <p:commandButton  action="#{loginForm.doAdminLogin()}" value="Login" icon="pi pi-user" styleClass="w-4" />
+               </div>
+               <p:messages id="message" showDetail="true" closable="true">
+                  <p:autoUpdate/>
+               </p:messages>
+            </div>
+         </div>
+      </div>
+   </h:form>
+</h:body>
+</html>

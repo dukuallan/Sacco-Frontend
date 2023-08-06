@@ -14,19 +14,91 @@
 
         <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
     </f:facet>
+
 </h:head>
+
+
 <h:body>
+    <div class="card">
     <f:view>
-        <h:outputLabel value="Welcome, User" styleClass="text-2xl"/>
+        <div class="grid grid-nogutter surface-section text-800 mt-8">
+            <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center surface-200 mt-2 ">
+                <section>
+                    <span class="block text-6xl text-primary font-bold mb-1">KIMWANYI SACCO</span>
+                    <div class="text-6xl font-bold mb-3">We grow together</div>
+                    <p class="mt-0 mb-4 text-700 line-height-3">Kimwanyi Sacco has been committed to providing accessible and affordable financial services to its members, promoting a culture of savings, and supporting the economic growth of the local community.</p>
 
-        <hr/>
-
-        <div>
-            <h:outputText value="Please Click this button"/>
-            <br/>
-            <p:button id="toDashboardButton" icon="pi pi-check" value="Navigate to Dashboard"
-                      outcome="/pages/dashboard/Dashboard.xhtml"/>
+                    <p:commandButton value="Learn More" type="button" class="mr-3 ui-button-raised"/>
+                </section>
+            </div>
+            <div class="col-12 md:col-6 overflow-hidden surface-200 mt-2">
+                <p:graphicImage name="saving3.jpg" library="images" alt="Image"
+                                styleClass="md:ml-auto block md:h-29rem"
+                                style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)"/>
+            </div>
         </div>
+
+        <div class="w-full surface-ground p-2 top-0 left-0 fixed shadow-3 flex justify-content-between">
+            <div class="flex justify-content-start align-items-center">
+                <p:avatar styleClass="ml-6 surface-ground" size="xlarge" shape="circle">
+                    <p:graphicImage name="logo.png" library="images"/>
+                </p:avatar>
+            </div>
+            <div class="flex justify-content-end align-items-center gap-3">
+
+                <p:commandButton id="basic"  type="button" value="Members" styleClass="rounded-button ui-button-info ui-button-outlined mr-2 px-3" icon="pi pi-fw pi-user-plus" />
+                <p:overlayPanel for="basic" style="width:200px">
+                    <p:button type="button" value="Login" styleClass="ui-button-secondary ui-button-flat"
+                              icon="pi pi-fw pi-sign-in" outcome="#{navigation.login}"/>
+                    <p:button type="button" value="Register" styleClass="ui-button-secondary ui-button-flat"
+                              icon="pi pi-fw pi-user-plus" outcome="#{navigation.register}"/>
+                </p:overlayPanel>
+
+                <p:button id="admin" outcome="#{navigation.adminLogin}" value="Admin" styleClass="rounded-button ui-button-info ui-button-outlined mr-2 px-3"/>
+
+
+            </div>
+        </div>
+
+
+
+                <p:divider />
+
+                <div class="card">
+                    <h3 class="text-center text-4xl">Our Services</h3>
+                    <div class="flex flex-wrap md:justify-content-between justify-content-center card-container">
+                        <div class="ml-8">
+                            <div class="border-round m-1 " style="min-width: 300px; min-height: 150px">
+                                <p:graphicImage name="student.jpg" library="images" alt="image not found" style = "width:300px; height: 150px; display:block;"/>
+                            </div>
+                            <h3 class=" text-2xl text-center">Savings Accounts</h3>
+                        </div>
+                        <div>
+                            <div class="border-round m-1 " style="min-width: 300px; min-height: 150px">
+                                <p:graphicImage name="loan.jpg" library="images" alt="image not found" style = "width:300px; height: 150px; display:block;"/>
+                            </div>
+                            <h3 class=" text-2xl text-center ">Community Service</h3>
+                        </div>
+                        <div class="mr-8">
+                            <div class="border-round m-1 " style="min-width: 300px; min-height: 150px">
+                                <p:graphicImage name="regular.jpg" library="images" alt="image not found" style = "width:300px; height: 150px; display:block;"/>
+                            </div>
+                            <h3 class=" text-2xl text-center">Financial Guidance</h3>
+                        </div>
+                    </div>
+                </div>
+
+                    <p:divider />
+
+                    <div>
+                        <h3 class ="text-4xl text-center">About Us</h3>
+
+                    </div>
+
     </f:view>
+    </div>
+
+
 </h:body>
+
 </html>

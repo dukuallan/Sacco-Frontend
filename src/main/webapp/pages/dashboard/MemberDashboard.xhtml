@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+    </f:facet>
+
+</h:head>
+<h:body>
+
+    <div class="w-2 h-full surface-ground fixed left-0  shadow-1">
+        <div class="flex block p-6 ">
+        </div>
+        <div class="flex block px-6 py-4 ">
+            <p:button type="button" value="Home" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-home" outcome="#{navigation.dashboard}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Account" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-credit-card" outcome="#{navigation.accountInfo}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Transaction" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-wallet" outcome="#{navigation.transaction}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Statistics" styleClass="ui-button-secondary ui-button-flat text-blue-700"
+                      icon="pi pi-fw pi-chart-line" outcome="#{navigation.recentStat} "/>
+        </div>
+    </div>
+
+    <div class="w-full surface-ground p-2 top-0 left-0 fixed shadow-3 flex justify-content-between">
+        <div class="flex justify-content-start align-items-center">
+            <p:avatar styleClass="ml-6 surface-ground" size="xlarge" shape="circle">
+                <p:graphicImage name="logo.png" library="images"/>
+            </p:avatar>
+        </div>
+        <div class="flex justify-content-end align-items-center">
+            <p:commandButton id="one" styleClass="ui-button-secondary ui-button-flat text-blue-700 font-bold font" value="#{loginForm.acceptedMember.firstName}"/>
+            <p:overlayPanel  for="one" style="width:300px">
+                <div class="text-2xl font-bold text-blue-700">
+                    <h:outputText value="Personal Details"/>
+                </div>
+                <div class="mt-4">
+                    <h:outputText styleClass="text-blue-700 font-bold" value="Name: "/>
+                    <h:outputText value="#{loginForm.acceptedMember.firstName} #{loginForm.acceptedMember.lastName}"/>
+                </div>
+                <div class="mt-4">
+                    <h:outputText styleClass="text-blue-700 font-bold" value="Location: "/>
+                    <h:outputText value="#{loginForm.acceptedMember.location}"/>
+                </div >
+                <div class="mt-4">
+                    <h:outputText styleClass="text-blue-700 font-bold" value="Date of Birth: "/>
+                    <h:outputText value="#{loginForm.acceptedMember.dateOfBirth}"/>
+                </div>
+                <div class="mt-4">
+                    <h:outputText styleClass="text-blue-700 font-bold" value="Email: "/>
+                    <h:outputText value="#{loginForm.acceptedMember.email}"/>
+                </div>
+                <div class="mt-4">
+                    <h:outputText styleClass="text-blue-700 font-bold" value="Gender: "/>
+                    <h:outputText value="#{loginForm.acceptedMember.gender}"/>
+                </div>
+                <div class="mt-4">
+                    <h:outputText styleClass="text-blue-700 font-bold" value="Account Number: "/>
+                    <h:outputText value="#{loginForm.acceptedMember.account.accountId}"/>
+                </div>
+
+            </p:overlayPanel>
+
+            <p:avatar rendered="#{loginForm.acceptedMember.status == true}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
+            <p:badge value="#{manageAccount.returnNotificationCount()}" severity="danger" >
+                <p:commandButton id="basic"  type="button"  styleClass="rounded-button ui-button-info ui-button-outlined mr-2 ml-3 px-3" icon="pi pi-bell" />
+                <p:overlayPanel for="basic" style="width:400px">
+                    <p:dataTable id="transactionTable" var="transaction" value="#{manageAccount.returnTransaction()}">
+                        <p:column headerText="Recent Withdraw">
+                            <h:outputText value="#{transaction.getNotification()}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:overlayPanel>
+            </p:badge>
+            <p:commandButton icon="pi pi-sign-out"  styleClass=" rounded-button ui-button-info ui-button-outlined mr-2 ml-3 px-3" action="#{loginForm.logout()}"/>
+
+        </div>
+    </div>
+
+    <div class="p-8 w-11 ml-8">
+        <h:form>
+            <div class="py-2 px-3 ml-8 flex align-content-between">
+
+                <div >
+
+                    <div class="grid">
+                        <div class="col-12 md:col-6 lg:col-4" >
+                            <div class="px-5 py-3 surface-card shadow-2 border-round" >
+                                <div class="text-blue-600 font-medium font-bold line-height-3 mb-2 flex align-content-between">
+                                    <p:avatar icon="pi pi-plus-circle" styleClass="mr-2 static" size="large" style="background-color:#2196F3; color:#fff;"/>
+                                    <p:outputLabel styleClass="ml-3 text-2xl text-blue-500"  value="Deposit"/>
+                                </div>
+                                <div class="px-3 mb-2 mt-4 flex align-content-between">
+                                    <div>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnDepositCount()}"/>
+                                        <p:outputLabel styleClass="block" value="Occurence"/>
+                                    </div>
+                                    <p:divider layout="vertical"/>
+                                    <div>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnDeposit()}"/>
+                                        <p:outputLabel styleClass="block" value="Total"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6 lg:col-4">
+                            <div class="px-5 py-3 surface-card shadow-2 border-round">
+                                <div class="text-blue-600 font-medium font-bold line-height-3 mb-2 flex align-content-between">
+                                    <p:avatar icon="pi pi-minus-circle" styleClass="mr-2 static" size="large" style="background-color:#6154b1; color:#fff;"/>
+                                    <p:outputLabel styleClass="ml-3 text-2xl text-purple-500"  value="Withdraw"/>
+                                </div>
+                                <div class="px-3 mb-2 mt-4 flex align-content-between">
+                                    <div>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnWithdrawCount()}"/>
+                                        <p:outputLabel styleClass="block" value="Occurence"/>
+                                    </div>
+                                    <p:divider layout="vertical"/>
+                                    <div>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnWithdraw()}"/>
+                                        <p:outputLabel styleClass="block" value="Total"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6 lg:col-4">
+                            <div class="px-5 py-3 surface-card shadow-2 border-round">
+                                <div class="text-blue-600 font-medium font-bold line-height-3 mb-2 flex align-content-between">
+                                    <p:avatar icon="pi pi-briefcase" styleClass="mr-2 static" size="large" style="background-color:#3f863c; color:#fff;"/>
+                                    <p:outputLabel styleClass="ml-3 text-2xl text-green-500"  value="Balance"/>
+                                </div>
+                                <div class=" px-3 mb-2 mt-4 flex align-content-between">
+                                    <div>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnBalance()}"/>
+                                        <p:outputLabel styleClass="block" value="Total Amount"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p:lineChart model="#{admin.lineModel}" style="width: 100%; height: 500px;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>
+
