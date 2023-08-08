@@ -1,17 +1,19 @@
 package org.pahappa.systems.kimanyisacco.models;
 
+import org.pahappa.systems.kimanyisacco.constants.BankName;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
     private long accountId;
-    private double amount;
-    private String bank;
-    private String bankAccount;
-    private String contact;
+    private double balance;
+    private BankName bankName;
+    private String bankAccountNumber;
+    private Member member;
     private List<Transaction> transaction = new ArrayList<>();
 
     @Id
@@ -24,54 +26,46 @@ public class Account {
         this.accountId = accountId;
     }
 
-    @Column(name = "amount", nullable = false)
-    public double getAmount() {
-        return amount;
+    @Column(name = "balance", nullable = false)
+    public double getBalance() {
+        return balance;
     }
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    @Column(name = "bank", nullable = false)
-    public String getBank() {
-        return bank;
-    }
-    public void setBank(String bank) {
-        this.bank = bank;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    @Column(name = "bank_account", nullable = false)
-    public String getBankAccount() {
-        return bankAccount;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "bank_name", nullable = false, length = 50)
+    public BankName getBankName() {
+        return bankName;
     }
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
-    }
-
-    @Column(name = "contact", nullable = false)
-    public String getContact() {
-        return contact;
-    }
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setBankName(BankName bankName) {
+        this.bankName = bankName;
     }
 
-    @OneToMany(mappedBy ="account" )
+    @Column(name = "bank_account_number", nullable = false)
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
+    }
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
+    @OneToOne(fetch = FetchType.EAGER)
+    public Member getMember() {
+        return member;
+    }
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    @OneToMany(mappedBy = "account")
     public List<Transaction> getTransaction() {
         return transaction;
     }
     public void setTransaction(List<Transaction> transaction) {
         this.transaction = transaction;
     }
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", amount=" + amount +
-                ", bank='" + bank + '\'' +
-                ", bankAccount='" + bankAccount + '\'' +
-                ", contact='" + contact + '\'' +
-                ", transaction=" + transaction +
-                '}';
-    }
+
+
 }

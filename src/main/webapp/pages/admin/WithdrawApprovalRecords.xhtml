@@ -54,23 +54,23 @@
          <div class="py-4 ml-8">
             <h3 class="text-center text-blue-700">Transactions Records</h3>
             <p:divider/>
-            <p:dataTable id="membersTable" var="product" value="#{verify.returnApprovalWithdraw()}">
+            <p:dataTable id="membersTable" var="member" value="#{withdrawApprovalRecords.displayAllApprovalWithdrawRecords()}">
                <p:column headerText="Transaction ID">
-                  <h:outputText value="#{product.transactionId}"/>
+                  <h:outputText value="#{member.transactionId}"/>
                </p:column>
 
                <p:column headerText="Transation Amount">
-                  <h:outputText value="#{product.amount}">
+                  <h:outputText value="#{member.transactionAmount}">
                      <f:convertNumber currencySymbol="Ugx. " type="currency" />
                   </h:outputText>
                </p:column>
 
                <p:column headerText="Date">
-                  <h:outputText value="#{product.date}" />
+                  <h:outputText value="#{member.dateOfTransaction}" />
                </p:column>
 
                <p:column  headerText="Status">
-                  <h:outputText value="#{product.withdrawStatus}" />
+                  <h:outputText value="#{member.transactionStatus}" />
                </p:column>
 
             </p:dataTable>

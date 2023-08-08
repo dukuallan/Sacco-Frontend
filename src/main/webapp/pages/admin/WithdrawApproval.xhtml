@@ -54,26 +54,26 @@
          <div class="py-4 ml-8">
             <h3 class="text-center text-blue-700">Withdraws To be Approved</h3>
             <p:divider/>
-            <p:dataTable id="membersTable" var="product" value="#{verify.returnApprovalTransaction()}">
+            <p:dataTable id="membersTable" var="member" value="#{withdrawApproval.displayPendingWithdrawalRequests()}">
                <p:column headerText="TransactID">
-                  <h:outputText value="#{product.transactionId}"/>
+                  <h:outputText value="#{member.transactionId}"/>
                </p:column>
                <p:column headerText="Amount" styleClass="w-2">
-                  <h:outputText value="#{product.amount}">
+                  <h:outputText value="#{member.transactionAmount}">
                      <f:convertNumber currencySymbol="Ugx. " type="currency" />
                   </h:outputText>
                </p:column>
                <p:column headerText="Date" styleClass="w-3">
-                  <h:outputText value="#{product.date}" />
+                  <h:outputText value="#{member.dateOfTransaction}" />
                </p:column>
                <p:column  headerText="Status">
-                  <h:outputText value="#{product.withdrawStatus}" />
+                  <h:outputText value="#{member.transactionStatus}" />
                </p:column>
                <p:column headerText="Verify">
-                  <p:commandButton styleClass="static ui-button-success" value="Approve" action="#{verify.approveWithdrawal(product.getTransactionId())}" update="membersTable"/>
+                  <p:commandButton styleClass="static ui-button-success" value="Approve" action="#{withdrawApproval.acceptWithdrawalRequest(member.getTransactionId(),member.getTransactionAmount())}" update="membersTable"/>
                </p:column>
                <p:column headerText="Reject">
-                  <p:commandButton styleClass="static ui-button-danger" value="Reject" action="#{verify.rejectWithdrawal(product.getTransactionId())}" update="membersTable"/>
+                  <p:commandButton styleClass="static ui-button-danger" value="Reject" action="#{withdrawApproval.rejectWithdrawalRequest(member.getTransactionId())}" update="membersTable"/>
                </p:column>
             </p:dataTable>
          </div>

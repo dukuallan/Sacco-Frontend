@@ -36,9 +36,6 @@ public class LoginForm {
             String baseUrl = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("member", acceptedMember.getMemberId());
-            if(acceptedMember.getAccount()!= null){
-                session.setAttribute("account",acceptedMember.getAccount().getAccountId());
-            }
             FacesContext.getCurrentInstance().getExternalContext().redirect(baseUrl + Hyperlinks.dashbord);
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid credentials.", "Please try again."));

@@ -39,6 +39,10 @@
                      <label for="password">Last Name</label>
                      <p:inputText required="true" requiredMessage="last name missing"  value="#{registerForm.member.lastName}" id="password" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                   </div>
+                  <div class="field col-12 md:col-12 ">
+                     <label for="phone">Contact</label>
+                     <p:inputText required="true" requiredMessage="member contact missing"  value="#{registerForm.member.memberContact}" id="phone" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
                   <div class="field col-12 md:col-6">
                      <label for="location">Password</label>
                      <p:password required="true" requiredMessage="password missing" value="#{registerForm.member.password}" id="location" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
@@ -73,11 +77,11 @@
                   </div>
                   <div class="field col-12 md:col-6 ">
                      <label for="next1">Name</label>
-                     <p:inputText required="true" requiredMessage="first name missing" value="#{registerForm.member.nextName}" id="next1" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText required="true" requiredMessage="first name missing" value="#{registerForm.member.nextOfKinName}" id="next1" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                   </div>
                   <div class="field col-12 md:col-6 ">
                      <label for="next2">Contact</label>
-                     <p:inputText required="true" requiredMessage="last name missing"  value="#{registerForm.member.contact}" id="next2" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText required="true" requiredMessage="last name missing" value="#{registerForm.member.nextOfKinContact}" id="next2" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                   </div>
                </div>
                   <div class="field col-12 flex justify-content-center">

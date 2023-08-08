@@ -45,7 +45,7 @@
         </div>
         <div class="flex justify-content-end align-items-center">
             <h:outputText styleClass="text-blue-700 font-bold font" value="#{loginForm.acceptedMember.firstName}"/>
-            <p:avatar rendered="#{loginForm.acceptedMember.status == true}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" />
+            <p:avatar rendered="#{loginForm.acceptedMember.memberStatus.equals(loginForm.member.memberStatus.VERIFIED)}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" />
             <p:commandButton icon="pi pi-sign-out" styleClass="rounded-button ui-button-info ui-button-outlined ml-3 mr-2 px-3" action="#{loginForm.logout()}"/>
 
         </div>
@@ -63,11 +63,11 @@
                         <h:form id="one">
                         <div>
                             <label for="depo" class="block text-900 font-medium mb-3 text-center font-bold">Amount</label>
-                            <p:inputText id="depo" styleClass="w-8 mb-3 ml-5" value="#{manageAccount.account.amount}"/>
+                            <p:inputText id="depo" styleClass="w-8 mb-3 ml-5" value="#{memberTransaction.account.balance}"/>
                         </div>
                         <div class="flex justify-content-center mb-4">
                             <p:growl id="growl1" showDetail="true" />
-                            <p:commandButton update="one growl1" action="#{manageAccount.makeDeposit(manageAccount.account.amount)}" value="Deposit" icon="pi pi-arrow-circle-down" styleClass="w-7"/>
+                            <p:commandButton update="one growl1" action="#{memberTransaction.makeDeposit(memberTransaction.account.balance)}" value="Deposit" icon="pi pi-arrow-circle-down" styleClass="w-7"/>
                         </div>
                         </h:form>
                     </div>
@@ -80,12 +80,12 @@
                         <h:form id="two">
                         <div>
                             <label for="with" class="block text-900 font-medium mb-3 text-center font-bold">Amount</label>
-                            <p:inputText id="with" styleClass="w-8 mb-3 ml-5" value="#{manageAccount.account.amount}"/>
+                            <p:inputText id="with" styleClass="w-8 mb-3 ml-5" value="#{memberTransaction.account.balance}"/>
                         </div>
 
                         <div class="flex justify-content-center mb-4">
                             <p:growl id="growl2" showDetail="true" />
-                            <p:commandButton update="two growl2" action="#{manageAccount.makeWithdraw(manageAccount.account.amount)}" value="Withdraw" icon="pi pi-arrow-circle-up" styleClass="w-7"/>
+                            <p:commandButton update="two growl2" action="#{memberTransaction.makeWithdraw(memberTransaction.account.balance)}" value="Withdraw" icon="pi pi-arrow-circle-up" styleClass="w-7"/>
                         </div>
                         </h:form>
                     </div>

@@ -1,12 +1,9 @@
 package org.pahappa.systems.kimanyisacco.services.impl;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.pahappa.systems.kimanyisacco.dao.AccountDAO;
+import org.pahappa.systems.kimanyisacco.constants.MemberStatus;
 import org.pahappa.systems.kimanyisacco.dao.MemberDAO;
-
-import org.pahappa.systems.kimanyisacco.models.Account;
 import org.pahappa.systems.kimanyisacco.models.Member;
-import org.pahappa.systems.kimanyisacco.models.Transaction;
 import org.pahappa.systems.kimanyisacco.services.MemberService;
 
 import java.util.List;
@@ -16,8 +13,6 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class MemberServiceImpl implements MemberService {
-    private final MemberDAO memberDAO = new MemberDAO();
-    private  final AccountDAO accountDAO = new AccountDAO();
     private List<Member> memberList;
     public MemberServiceImpl(){}
     @Override
@@ -25,53 +20,24 @@ public class MemberServiceImpl implements MemberService {
         // Hash the password before storing it in the database
         String hashedPassword = hashPassword(member.getPassword());
         member.setPassword(hashedPassword);
-        memberDAO.save(member);
+        member.setMemberStatus(MemberStatus.PENDING);
+        MemberDAO.save(member);
     }
     @Override
     public List<Member> getMembers(){
         memberList = MemberDAO.getAllMembers();
         return memberList;
-
-    }
-    @Override
-    public List<Transaction> getTransaction(){
-        return AccountDAO.getAllTransactions();
     }
     @Override
     public void updateMember(Member member){
             MemberDAO.update(member);
-
-    }
-    @Override
-    public void updateTransactions(Transaction transaction){
-        AccountDAO.update(transaction);
-    }
-
-    @Override
-    public void createAccount(Account account){
-        accountDAO.save(account);
     }
 
     @Override
     public Member getMemberById(long memberId){
         return MemberDAO.getMemberById(memberId);
     }
-    @Override
-    public Account getAccountById(long accountId){
-        return AccountDAO.getAccountById(accountId);
-    }
-    @Override
-    public void updateAccountAmount(long accountId, double depositAmount){
-        accountDAO.updateAccountAmount(accountId, depositAmount);
-    }
-    @Override
-    public Transaction getTransactionById(long transactionId){
-        return AccountDAO.getTransactionById(transactionId);
-    }
-    @Override
-    public void updateTransactionStatus(Transaction transaction){
-        AccountDAO.approveStatus(transaction);
-    }
+
     @Override
     public void sendVerificationEmail(String recipientEmail ,String firstName) {
         // Configure the email properties
@@ -165,10 +131,7 @@ public class MemberServiceImpl implements MemberService {
             e.printStackTrace();
         }
     }
-    @Override
-    public void withdrawAmount(long accountId, double newAmount){
-        accountDAO.withdrawAmount(accountId,newAmount);
-    }
+
     @Override
     public void deleteMember(Member member){
         MemberDAO.remove(member);

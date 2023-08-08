@@ -1,20 +1,20 @@
 package org.pahappa.systems.kimanyisacco.models;
 
+import org.pahappa.systems.kimanyisacco.constants.TransactionStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "transaction")
+@Table(name = "transactions")
 public class Transaction {
     private long transactionId;
-    private double amount;
-    private String type;
-    private Date date;
-    private boolean status;
-    private String notification;
-    private String withdrawStatus;
+    private double transactionAmount;
+    private String transactionType;
+    private Date dateOfTransaction;
+    private String WithdrawNotification;
+    private TransactionStatus transactionStatus;
     private Account account;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,60 +27,52 @@ public class Transaction {
     }
 
     @Column(name = "transaction_amount", nullable = false)
-    public double getAmount() {
-        return amount;
+    public double getTransactionAmount() {
+        return transactionAmount;
     }
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setTransactionAmount(double transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
     @Column(name = "transaction_type", nullable = false)
-    public String getType() {
-        return type;
+    public String getTransactionType() {
+        return transactionType;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 
     @Column(name = "transaction_date", nullable = false)
-    public Date getDate() {
-        return date;
+    public Date getDateOfTransaction() {
+        return dateOfTransaction;
     }
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Column(name = "transaction_status", nullable = false)
-    public boolean isStatus() {
-        return status;
-    }
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setDateOfTransaction(Date dateOfTransaction) {
+        this.dateOfTransaction = dateOfTransaction;
     }
 
-    @Column(name = "notification", nullable = true)
-    public String getNotification() {
-        return notification;
+    @Column(name = "withdraw_notification", nullable = true)
+    public String getWithdrawNotification() {
+        return WithdrawNotification;
     }
-    public void setNotification(String notification) {
-        this.notification = notification;
-    }
-
-    @Column(name = "withdraw_status")
-    public String getWithdrawStatus() {
-        return withdrawStatus;
-    }
-    public void setWithdrawStatus(String withdrawStatus) {
-        this.withdrawStatus = withdrawStatus;
+    public void setWithdrawNotification(String withdrawNotification) {
+        this.WithdrawNotification = withdrawNotification;
     }
 
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_status", nullable = false, length = 50)
+    public TransactionStatus getTransactionStatus() {
+        return transactionStatus;
+    }
+    public void setTransactionStatus(TransactionStatus transactionStatus) {
+        this.transactionStatus = transactionStatus;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
     public Account getAccount() {
         return account;
     }
     public void setAccount(Account account) {
         this.account = account;
     }
-
 
 }

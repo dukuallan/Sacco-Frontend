@@ -54,29 +54,29 @@
                 <div class="py-4 ml-8">
                     <h3 class="text-center text-blue-700">Members To be Verified</h3>
 
-                    <p:dataTable id="membersTable" var="product" value="#{verify.showMembers()}">
+                    <p:dataTable id="membersTable" var="member" value="#{memberVerification.displayUnverifiedMembers()}">
                         <p:column headerText="Name" styleClass="w-2">
-                            <h:outputText value="#{product.getFirstName()} #{product.getLastName()}"/>
+                            <h:outputText value="#{member.getFirstName()} #{member.getLastName()}"/>
                         </p:column>
 
                         <p:column headerText="Email" styleClass="w-3">
-                            <h:outputText value="#{product.email}" />
+                            <h:outputText value="#{member.email}" />
                         </p:column>
 
                         <p:column headerText="Location">
-                            <h:outputText value="#{product.location}" />
+                            <h:outputText value="#{member.location}" />
                         </p:column>
 
                         <p:column headerText="Status">
-                            <h:outputText value="#{product.status}" />
+                            <h:outputText value="#{member.memberStatus}" />
                         </p:column>
 
                         <p:column headerText="Verify">
-                            <p:commandButton styleClass="static ui-button-success" value="Approve" action="#{verify.updateMember(product)}" update="membersTable"/>
+                            <p:commandButton styleClass="static ui-button-success" value="Approve" action="#{memberVerification.acceptMember(member)}" update="membersTable"/>
                         </p:column>
 
                         <p:column headerText="Deny" >
-                            <p:commandButton styleClass="static hover:bg-red-700 ui-button-danger" value="Reject" action="#{verify.deleteMember(product)}" update="membersTable"/>
+                            <p:commandButton styleClass="static hover:bg-red-700 ui-button-danger" value="Reject" action="#{memberVerification.rejectMember(member)}" update="membersTable"/>
                         </p:column>
 
                     </p:dataTable>

@@ -11,7 +11,6 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
       <meta name="apple-mobile-web-app-capable" content="yes"/>
-
       <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
 
    </f:facet>
@@ -45,7 +44,7 @@
       </div>
       <div class="flex justify-content-end align-items-center">
          <h:outputText styleClass="text-blue-700 font-bold font" value="#{loginForm.acceptedMember.firstName}"/>
-         <p:avatar rendered="#{loginForm.acceptedMember.status == true}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
+         <p:avatar rendered="#{loginForm.acceptedMember.memberStatus.equals(loginForm.member.memberStatus.VERIFIED)}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
          <p:commandButton icon="pi pi-sign-out" styleClass="rounded-button ui-button-info ui-button-outlined ml-3 mr-2 px-3" action="#{loginForm.logout()}"/>
       </div>
    </div>
@@ -55,24 +54,24 @@
          <div class="py-4 ml-8">
             <h3 class="text-center text-blue-700">Transaction Records</h3>
             <p:divider/>
-            <p:dataTable id="transactionTable" var="transaction" value="#{manageAccount.returnTransaction()}">
+            <p:dataTable id="transactionTable" var="transaction" value="#{memberTransactionRecords.displayUserTransactionRecords()}">
                <p:column headerText="TransactionId">
                   <h:outputText value="#{transaction.getTransactionId()}" />
                </p:column>
                <p:column headerText="Amount">
-                  <h:outputText value="#{transaction.getAmount()}">
+                  <h:outputText value="#{transaction.getTransactionAmount()}">
                      <f:convertNumber currencySymbol="Ugx. " type="currency" />
                   </h:outputText>
                </p:column>
 
                <p:column headerText="Type">
-                  <h:outputText value="#{transaction.getType()}" />
+                  <h:outputText value="#{transaction.getTransactionType()}" />
                </p:column>
                <p:column headerText="Date" styleClass="w-3">
-                  <h:outputText value="#{transaction.getDate()}" />
+                  <h:outputText value="#{transaction.getDateOfTransaction()}" />
                </p:column>
                <p:column headerText="Status" >
-                  <h:outputText value="#{transaction.withdrawStatus}" />
+                  <h:outputText value="#{transaction.transactionStatus}" />
                </p:column>
             </p:dataTable>
          </div>

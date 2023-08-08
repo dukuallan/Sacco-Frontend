@@ -69,18 +69,18 @@
                 </div>
                 <div class="mt-4">
                     <h:outputText styleClass="text-blue-700 font-bold" value="Account Number: "/>
-                    <h:outputText value="#{loginForm.acceptedMember.account.accountId}"/>
+                    <h:outputText value="#{loginForm.acceptedMember.nextOfKinName}"/>
                 </div>
 
             </p:overlayPanel>
 
-            <p:avatar rendered="#{loginForm.acceptedMember.status == true}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
-            <p:badge value="#{manageAccount.returnNotificationCount()}" severity="danger" >
+            <p:avatar rendered="#{loginForm.acceptedMember.memberStatus.equals(loginForm.member.memberStatus.VERIFIED)}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
+            <p:badge value="#{memberDashboard.notificationCount}" severity="danger" >
                 <p:commandButton id="basic"  type="button"  styleClass="rounded-button ui-button-info ui-button-outlined mr-2 ml-3 px-3" icon="pi pi-bell" />
                 <p:overlayPanel for="basic" style="width:400px">
-                    <p:dataTable id="transactionTable" var="transaction" value="#{manageAccount.returnTransaction()}">
+                    <p:dataTable id="transactionTable" var="transaction" value="#{memberTransactionRecords.displayUserTransactionRecords()}">
                         <p:column headerText="Recent Withdraw">
-                            <h:outputText value="#{transaction.getNotification()}" />
+                            <h:outputText value="#{transaction.getWithdrawNotification()}" />
                         </p:column>
                     </p:dataTable>
                 </p:overlayPanel>
@@ -105,12 +105,12 @@
                                 </div>
                                 <div class="px-3 mb-2 mt-4 flex align-content-between">
                                     <div>
-                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnDepositCount()}"/>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{memberDashboard.depositCount}"/>
                                         <p:outputLabel styleClass="block" value="Occurence"/>
                                     </div>
                                     <p:divider layout="vertical"/>
                                     <div>
-                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnDeposit()}"/>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{memberDashboard.memberDeposits}"/>
                                         <p:outputLabel styleClass="block" value="Total"/>
                                     </div>
                                 </div>
@@ -124,12 +124,12 @@
                                 </div>
                                 <div class="px-3 mb-2 mt-4 flex align-content-between">
                                     <div>
-                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnWithdrawCount()}"/>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{memberDashboard.withdrawCount}"/>
                                         <p:outputLabel styleClass="block" value="Occurence"/>
                                     </div>
                                     <p:divider layout="vertical"/>
                                     <div>
-                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnWithdraw()}"/>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{memberDashboard.memberWithdraws}"/>
                                         <p:outputLabel styleClass="block" value="Total"/>
                                     </div>
                                 </div>
@@ -143,14 +143,14 @@
                                 </div>
                                 <div class=" px-3 mb-2 mt-4 flex align-content-between">
                                     <div>
-                                        <p:outputLabel styleClass="block text-3xl" value="#{manageAccount.returnBalance()}"/>
+                                        <p:outputLabel styleClass="block text-3xl" value="#{memberDashboard.memberBalance}"/>
                                         <p:outputLabel styleClass="block" value="Total Amount"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <p:lineChart model="#{admin.lineModel}" style="width: 100%; height: 500px;"/>
+
                         </div>
                     </div>
                 </div>

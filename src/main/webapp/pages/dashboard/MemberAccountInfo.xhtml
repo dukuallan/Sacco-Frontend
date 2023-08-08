@@ -45,7 +45,7 @@
         </div>
         <div class="flex justify-content-end align-items-center">
             <h:outputText styleClass="text-blue-700 font-bold font" value="#{loginForm.acceptedMember.firstName}"/>
-            <p:avatar rendered="#{loginForm.acceptedMember.status == true}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
+            <p:avatar rendered="#{loginForm.acceptedMember.memberStatus.equals(loginForm.member.memberStatus.VERIFIED)}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
             <p:commandButton icon="pi pi-sign-out" styleClass="rounded-button ui-button-info ui-button-outlined ml-3 mr-2 px-3" action="#{loginForm.logout()}"/>
 
         </div>
@@ -61,20 +61,24 @@
                 <div class="formgrid grid">
 
                     <div class="field col-12 md:col-6">
-                        <label for="bank">Bank</label>
-                        <p:inputText required="true" requiredMessage="bank name missing" value="#{manageAccount.account.bank}" id="bank" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                        <label for="bank">Bank Name</label>
+                        <h:selectOneMenu required="true" requiredMessage="bank name missing"  id="bank" value="#{memberAccountInfo.account.bankName}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto" >
+                            <f:selectItem itemLabel="ABSA BANK" itemValue="#{memberAccountInfo.getBankName()[0]}" />
+                            <f:selectItem itemLabel="CRANE BANK" itemValue="#{memberAccountInfo.getBankName()[1]}" />
+                            <f:selectItem itemLabel="STANBIC BANK" itemValue="#{memberAccountInfo.getBankName()[2]}" />
+                            <f:selectItem itemLabel="DFCU BANK" itemValue="#{memberAccountInfo.getBankName()[3]}" />
+                            <f:selectItem itemLabel="UBA BANK" itemValue="#{memberAccountInfo.getBankName()[4]}" />
+                            <f:selectItem itemLabel="CENTENARY BANK" itemValue="#{memberAccountInfo.getBankName()[5]}" />
+                        </h:selectOneMenu>
                     </div>
                     <div class="field col-12 md:col-6">
-                        <label for="account">Bank Account</label>
-                        <p:inputText required="true" requiredMessage="bank account missing" value="#{manageAccount.account.bankAccount}" id="account" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                        <label for="account">Bank Account Number</label>
+                        <p:inputText required="true" requiredMessage="bank account missing" value="#{memberAccountInfo.account.bankAccountNumber}" id="account" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                     </div>
-                    <div class="field col-12 md:col-6">
-                        <label for="city">Telephone Contact</label>
-                        <p:inputText required="true" requiredMessage="telephone contact missing" value="#{manageAccount.account.contact}" id="city" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
-                    </div>
+
                     <p:row >
                         <div class="field col-12 md:col-6 flex justify-content-end ml-8 px-8">
-                            <p:commandButton update="growl" action="#{manageAccount.registerAccount()}" value="Register"  styleClass="w-8"/>
+                            <p:commandButton update="growl" action="#{memberAccountInfo.registerAccount()}" value="Register"  styleClass="w-8"/>
                         </div>
                     </p:row>
 

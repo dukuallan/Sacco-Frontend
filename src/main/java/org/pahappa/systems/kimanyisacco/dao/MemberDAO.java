@@ -9,7 +9,7 @@ import org.pahappa.systems.kimanyisacco.models.Member;
 import java.util.List;
 
 public class MemberDAO {
-    public void save(Member member){
+    public static void save(Member member){
         Transaction transaction = null;
         try{
             Session session = SessionConfiguration.getSessionFactory().openSession();
@@ -71,8 +71,5 @@ public class MemberDAO {
         }
 
     }
-
-
-
 
 }

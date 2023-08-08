@@ -1,6 +1,7 @@
 package org.pahappa.systems.kimanyisacco.models;
 
 import org.pahappa.systems.kimanyisacco.constants.Gender;
+import org.pahappa.systems.kimanyisacco.constants.MemberStatus;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,12 +15,12 @@ public class Member {
     private String password;
     private Date dateOfBirth;
     private String email;
+    private String memberContact;
     private String location;
     private Gender gender;
-    private boolean status;
-    private String nextName;
-    private String contact;
-    private Account account;
+    private MemberStatus memberStatus;
+    private String nextOfKinName;
+    private String nextOfKinContact;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -79,7 +80,15 @@ public class Member {
         this.location = location;
     }
 
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "member_contact", nullable = false, length = 50)
+    public String getMemberContact() {
+        return memberContact;
+    }
+    public void setMemberContact(String memberContact) {
+        this.memberContact = memberContact;
+    }
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false, length = 50)
     public Gender getGender() {
         return gender;
@@ -88,36 +97,29 @@ public class Member {
         this.gender = gender;
     }
 
-    @Column(name = "status" ,columnDefinition = "boolean default false")
-    public boolean isStatus() {
-        return status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "member_status", nullable = false, length = 50)
+    public MemberStatus getMemberStatus() {
+        return memberStatus;
     }
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    @Column(name = "kin_name", nullable = false, length = 50)
-    public String getNextName() {
-        return nextName;
-    }
-    public void setNextName(String nextName) {
-        this.nextName = nextName;
+    public void setMemberStatus(MemberStatus memberStatus) {
+        this.memberStatus = memberStatus;
     }
 
-    @Column(name = "kin_contact", nullable = false, length = 50)
-    public String getContact() {
-        return contact;
+    @Column(name = "next_of_kin_name", nullable = false, length = 50)
+    public String getNextOfKinName() {
+        return nextOfKinName;
     }
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setNextOfKinName(String nextOfKinName) {
+        this.nextOfKinName = nextOfKinName;
     }
 
-    @OneToOne(fetch = FetchType.EAGER)
-    public Account getAccount() {
-        return account;
+    @Column(name = "next_of_kin_contact", nullable = false, length = 50)
+    public String getNextOfKinContact() {
+        return nextOfKinContact;
     }
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setNextOfKinContact(String nextOfKinContact) {
+        this.nextOfKinContact = nextOfKinContact;
     }
 
     @Override
@@ -127,12 +129,14 @@ public class Member {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
                 ", email='" + email + '\'' +
+                ", memberContact='" + memberContact + '\'' +
                 ", location='" + location + '\'' +
-                ", gender='" + gender + '\'' +
-                ", status=" + status +
-                ", account=" + account +
+                ", gender=" + gender +
+                ", memberStatus=" + memberStatus +
+                ", nextOfKinName='" + nextOfKinName + '\'' +
+                ", nextOfKinContact='" + nextOfKinContact + '\'' +
                 '}';
     }
 }
