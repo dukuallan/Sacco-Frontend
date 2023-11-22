@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+   <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+      <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+      <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+   </f:facet>
+
+
+</h:head>
+
+
+   <h:body>
+      <h:form id="formUpdate">
+         <p:growl id="messages" showDetail="true"/>
+      <div class="card flex justify-content-center">
+
+            <div class="w-6 h-auto border-50  surface-ground shadow-2 p-3 border-round-sm">
+
+                     <div class="text-center py-2">
+                        <h3>Registration Form</h3>
+                     </div>
+
+               <div class="formgrid grid">
+                  <div class="field col-12 md:col-6 ">
+                     <label for="firstname6">First Name</label>
+                     <p:inputText required="true" requiredMessage="first name missing" value="#{registerForm.member.firstName}" id="firstname6" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
+                  <div class="field col-12 md:col-6 ">
+                     <label for="password">Last Name</label>
+                     <p:inputText required="true" requiredMessage="last name missing"  value="#{registerForm.member.lastName}" id="password" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
+                  <div class="field col-12 md:col-12 ">
+                     <label for="phone">Contact</label>
+                     <p:inputText required="true" requiredMessage="member contact missing"  value="#{registerForm.member.memberContact}" id="phone" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
+                  <div class="field col-12 md:col-6">
+                     <label for="location">Password</label>
+                     <p:password required="true" requiredMessage="password missing" value="#{registerForm.member.password}" id="location" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
+                  <div class="field col-12 md:col-3">
+                     <label for="dateOfBirth">Date of Birth</label>
+                     <p:datePicker id="dateOfBirth" mindate="1950-01-01" maxdate="#{registerForm.maxSelectableDate}" pattern="yyyy-MM-dd" monthNavigator="true"  yearNavigator="true"  required="true" requiredMessage="date of birth missing" value="#{registerForm.member.dateOfBirth}" />
+                  </div>
+                  <div class="field col-12">
+                     <div class="field">
+                        <label for="email">Email</label>
+                        <p:inputText  required="true" requiredMessage="email missing"  value="#{registerForm.member.email}" id="email" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                           <f:validateRegex pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"/>
+                        </p:inputText>
+                     </div>
+                  </div>
+                  <div class="field col-12 md:col-6">
+                     <label for="contact">Location</label>
+                     <p:inputText required="true" requiredMessage="contact missing"  value="#{registerForm.member.location}" id="contact" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
+                  <div class="field col-12 md:col-3">
+                     <label for="gender">Gender</label>
+                     <h:selectOneMenu required="true" requiredMessage="gender missing"  id="gender" value="#{registerForm.member.gender}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto" >
+                        <f:selectItem itemLabel="Male" itemValue="#{registerForm.getGender()[0]}" />
+                        <f:selectItem itemLabel="Female" itemValue="#{registerForm.getGender()[1]}" />
+                        <f:selectItem itemLabel="Prefer Not to Say" itemValue="#{registerForm.getGender()[2]}" />
+                     </h:selectOneMenu>
+                  </div>
+                  <p:divider/>
+                  <div class="field col-12 md:col-12 mb-4">
+                     <h:outputText value="Next of Kin"/>
+                  </div>
+                  <div class="field col-12 md:col-6 ">
+                     <label for="next1">Name</label>
+                     <p:inputText required="true" requiredMessage="first name missing" value="#{registerForm.member.nextOfKinName}" id="next1" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
+                  <div class="field col-12 md:col-6 ">
+                     <label for="next2">Contact</label>
+                     <p:inputText required="true" requiredMessage="last name missing" value="#{registerForm.member.nextOfKinContact}" id="next2" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  </div>
+               </div>
+                  <div class="field col-12 flex justify-content-center">
+                     <p:commandButton update="formUpdate messages" value="Register" action="#{registerForm.doRegister()}"/>
+                  </div>
+                  <div class=" col-12 flex justify-content-center">
+                     <p:link value="Login" outcome="#{navigation.login}"/>
+                  </div>
+               </div>
+            </div>
+      </h:form>
+   </h:body>
+</html>

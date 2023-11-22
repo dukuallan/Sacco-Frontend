@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+
+    </f:facet>
+
+</h:head>
+<h:body>
+
+    <div class="w-2 h-full surface-ground fixed left-0  shadow-1">
+        <div class="flex block p-6 ">
+        </div>
+        <div class="flex block px-6 py-4 ">
+            <p:button type="button" value="Home" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-home" outcome="#{navigation.dashboard}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Account" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-credit-card" outcome="#{navigation.accountInfo}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Transaction" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-wallet" outcome="#{navigation.transaction}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Statistics" styleClass="ui-button-secondary ui-button-flat text-blue-700"
+                      icon="pi pi-fw pi-chart-line" outcome="#{navigation.recentStat}"/>
+        </div>
+    </div>
+
+    <div class="w-full surface-ground p-2 top-0 left-0 fixed shadow-3 flex justify-content-between">
+        <div class="flex justify-content-start align-items-center">
+            <p:avatar styleClass="ml-6 surface-ground" size="xlarge" shape="circle">
+                <p:graphicImage name="logo.png" library="images"/>
+            </p:avatar>
+        </div>
+        <div class="flex justify-content-end align-items-center">
+            <h:outputText styleClass="text-blue-700 font-bold font" value="#{loginForm.acceptedMember.firstName}"/>
+            <p:avatar rendered="#{loginForm.acceptedMember.memberStatus.equals(loginForm.member.memberStatus.VERIFIED)}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" />
+            <p:commandButton icon="pi pi-sign-out" styleClass="rounded-button ui-button-info ui-button-outlined ml-3 mr-2 px-3" action="#{loginForm.logout()}"/>
+
+        </div>
+    </div>
+
+    <div class="py-5 p-8 w-11 ml-8">
+            <div class="py-4 ml-8 mt-7">
+                <h3 class="text-center text-blue-700 text-900">Transaction</h3>
+            <div class="grid flex justify-content-center gap-8 pt-5">
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="px-5 py-3 surface-card shadow-2 border-round">
+                        <div class="text-blue-700 text-900 font-bold line-height-3 text-2xl mb-4 text-center">
+                            Deposits
+                        </div>
+                        <h:form id="one">
+                        <div>
+                            <label for="depo" class="block text-900 font-medium mb-3 text-center font-bold">Amount</label>
+                            <p:inputText id="depo" styleClass="w-8 mb-3 ml-5" value="#{memberTransaction.account.balance}"/>
+                        </div>
+                        <div class="flex justify-content-center mb-4">
+                            <p:growl id="growl1" showDetail="true" />
+                            <p:commandButton update="one growl1" action="#{memberTransaction.makeDeposit(memberTransaction.account.balance)}" value="Deposit" icon="pi pi-arrow-circle-down" styleClass="w-7"/>
+                        </div>
+                        </h:form>
+                    </div>
+                </div>
+                <div class="col-12 md:col-6 lg:col-4">
+                    <div class="px-5 py-3 surface-card shadow-2 border-round">
+                        <div class="text-blue-700 text-900 font-bold line-height-3 text-2xl mb-4 text-center">
+                            Withdraws
+                        </div>
+                        <h:form id="two">
+                        <div>
+                            <label for="with" class="block text-900 font-medium mb-3 text-center font-bold">Amount</label>
+                            <p:inputText id="with" styleClass="w-8 mb-3 ml-5" value="#{memberTransaction.account.balance}"/>
+                        </div>
+
+                        <div class="flex justify-content-center mb-4">
+                            <p:growl id="growl2" showDetail="true" />
+                            <p:commandButton update="two growl2" action="#{memberTransaction.makeWithdraw(memberTransaction.account.balance)}" value="Withdraw" icon="pi pi-arrow-circle-up" styleClass="w-7"/>
+                        </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+    </div>
+
+</h:body>
+</html>
+
+

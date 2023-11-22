@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+   <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+      <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+      <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+
+   </f:facet>
+
+</h:head>
+<h:body>
+
+   <div class="w-2 h-full surface-ground fixed left-0 shadow-1">
+      <div class="flex block p-6 ">
+      </div>
+      <div class="flex block px-6 py-4 ">
+         <p:button type="button" icon="pi pi-verified" value="Verification" styleClass="ui-button-secondary ui-button-flat text-blue-700" outcome="#{navigation.admin}"/>
+      </div>
+      <div class="px-6 py-4  block">
+         <p:button type="button" icon="pi pi-check-circle" value="Approval" styleClass="ui-button-secondary ui-button-flat text-blue-700" outcome="#{navigation.approval}"/>
+      </div>
+      <div class="px-6 py-4  block">
+         <p:button type="button" icon="pi pi-chart-line" value="Statistics" styleClass="ui-button-secondary ui-button-flat text-blue-700" outcome="#{navigation.statistics}"/>
+      </div>
+      <div class="px-6 py-4  block">
+         <p:button type="button" icon="pi pi-thumbs-up" value="Transactions" styleClass="ui-button-secondary ui-button-flat text-blue-700" outcome="#{navigation.approvalList}"/>
+      </div>
+   </div>
+
+   <div class="w-full surface-ground p-2 top-0 left-0 fixed shadow-3 flex justify-content-between">
+      <div class="flex justify-content-start align-items-center">
+         <p:avatar styleClass="ml-6 surface-ground" size="xlarge" shape="circle">
+            <p:graphicImage name="logo.png" library="images"/>
+         </p:avatar>
+      </div>
+      <div class="flex justify-content-end align-items-center gap-3">
+         <h:outputText value="Admin" styleClass="text-blue-700 text-2xl font-bold"/>
+         <p:avatar icon="pi pi-user" size="large" styleClass="mr-1 text-blue-700 " shape="circle"/>
+         <p:button icon="pi pi-sign-out" styleClass="rounded-button text-blue-700 ui-button-info ui-button-outlined mr-2 px-3" outcome="#{navigation.landing}"/>
+      </div>
+   </div>
+
+   <div class="p-8 w-11 ml-8">
+      <h:form>
+         <div class="py-4 ml-8">
+            <h3 class="text-center text-blue-700">Withdraws To be Approved</h3>
+            <p:divider/>
+            <p:dataTable id="membersTable" var="member" value="#{withdrawApproval.displayPendingWithdrawalRequests()}">
+               <p:column headerText="TransactID">
+                  <h:outputText value="#{member.transactionId}"/>
+               </p:column>
+               <p:column headerText="Amount" styleClass="w-2">
+                  <h:outputText value="#{member.transactionAmount}">
+                     <f:convertNumber currencySymbol="Ugx. " type="currency" />
+                  </h:outputText>
+               </p:column>
+               <p:column headerText="Date" styleClass="w-3">
+                  <h:outputText value="#{member.dateOfTransaction}" />
+               </p:column>
+               <p:column  headerText="Status">
+                  <h:outputText value="#{member.transactionStatus}" />
+               </p:column>
+               <p:column headerText="Verify">
+                  <p:commandButton styleClass="static ui-button-success" value="Approve" action="#{withdrawApproval.acceptWithdrawalRequest(member.getTransactionId(),member.getTransactionAmount())}" update="membersTable"/>
+               </p:column>
+               <p:column headerText="Reject">
+                  <p:commandButton styleClass="static ui-button-danger" value="Reject" action="#{withdrawApproval.rejectWithdrawalRequest(member.getTransactionId())}" update="membersTable"/>
+               </p:column>
+            </p:dataTable>
+         </div>
+      </h:form>
+   </div>
+
+</h:body>
+</html>
+

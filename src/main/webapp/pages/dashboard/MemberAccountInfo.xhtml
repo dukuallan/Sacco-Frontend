@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+
+    </f:facet>
+
+</h:head>
+<h:body>
+
+    <div class="w-2 h-full surface-ground fixed left-0 shadow-1">
+        <div class="flex block p-6 ">
+        </div>
+        <div class="flex block px-6 py-4 ">
+            <p:button type="button" value="Home" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-home" outcome="#{navigation.dashboard}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Account" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-credit-card" outcome="#{navigation.accountInfo}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Transaction" styleClass="ui-button-secondary ui-button-flat text-blue-700" icon="pi pi-fw pi-wallet" outcome="#{navigation.transaction}"/>
+        </div>
+        <div class="px-6 py-4 block">
+            <p:button type="button" value="Statistics" styleClass="ui-button-secondary ui-button-flat text-blue-700"
+                      icon="pi pi-fw pi-chart-line" outcome="#{navigation.recentStat}"/>
+        </div>
+    </div>
+
+    <div class="w-full surface-ground p-2 top-0 left-0 fixed shadow-3 flex justify-content-between">
+        <div class="flex justify-content-start align-items-center">
+            <p:avatar styleClass="ml-6 surface-ground" size="xlarge" shape="circle">
+                <p:graphicImage name="logo.png" library="images"/>
+            </p:avatar>
+        </div>
+        <div class="flex justify-content-end align-items-center">
+            <h:outputText styleClass="text-blue-700 font-bold font" value="#{loginForm.acceptedMember.firstName}"/>
+            <p:avatar rendered="#{loginForm.acceptedMember.memberStatus.equals(loginForm.member.memberStatus.VERIFIED)}" icon="pi pi-verified" styleClass="mr-1 surface-ground" style="color:#3f863c" shape="circle"/>
+            <p:commandButton icon="pi pi-sign-out" styleClass="rounded-button ui-button-info ui-button-outlined ml-3 mr-2 px-3" action="#{loginForm.logout()}"/>
+
+        </div>
+    </div>
+
+    <div class="py-5 p-8 w-11 ml-8">
+        <h:form>
+            <p:growl id="growl" showDetail="true" />
+            <div class="py-5 ml-8 mt-6">
+                <h3 class="text-center">Register Account</h3>
+
+            <div class="surface-card p-6 shadow-2 border-round w-full lg:w-full">
+                <div class="formgrid grid">
+
+                    <div class="field col-12 md:col-6">
+                        <label for="bank">Bank Name</label>
+                        <h:selectOneMenu required="true" requiredMessage="bank name missing"  id="bank" value="#{memberAccountInfo.account.bankName}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto" >
+                            <f:selectItem itemLabel="ABSA BANK" itemValue="#{memberAccountInfo.getBankName()[0]}" />
+                            <f:selectItem itemLabel="CRANE BANK" itemValue="#{memberAccountInfo.getBankName()[1]}" />
+                            <f:selectItem itemLabel="STANBIC BANK" itemValue="#{memberAccountInfo.getBankName()[2]}" />
+                            <f:selectItem itemLabel="DFCU BANK" itemValue="#{memberAccountInfo.getBankName()[3]}" />
+                            <f:selectItem itemLabel="UBA BANK" itemValue="#{memberAccountInfo.getBankName()[4]}" />
+                            <f:selectItem itemLabel="CENTENARY BANK" itemValue="#{memberAccountInfo.getBankName()[5]}" />
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="account">Bank Account Number</label>
+                        <p:inputText required="true" requiredMessage="bank account missing" value="#{memberAccountInfo.account.bankAccountNumber}" id="account" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                    </div>
+
+                    <p:row >
+                        <div class="field col-12 md:col-6 flex justify-content-end ml-8 px-8">
+                            <p:commandButton update="growl" action="#{memberAccountInfo.registerAccount()}" value="Register"  styleClass="w-8"/>
+                        </div>
+                    </p:row>
+
+                </div>
+            </div>
+
+            </div>
+        </h:form>
+    </div>
+
+</h:body>
+</html>
+
